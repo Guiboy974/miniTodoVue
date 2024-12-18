@@ -1,6 +1,5 @@
 <style>
 .terminer {
-  color: darkgreen;
   opacity: 0.5;
   text-decoration: line-through;
 }
@@ -9,9 +8,6 @@ li:hover {
   cursor: pointer;
 }
 
-ul.list-group.bg-transparent {
-  background-color: transparent !important;
-}
 </style>
 
 <template>
@@ -28,9 +24,9 @@ ul.list-group.bg-transparent {
     <section class="mt-3 text-center" v-if="todos.length === 0">
       <h3>pas de tâches en cours</h3>
     </section>
-    <section class="mt-3">
+    <section class="mt-3" v-else="todos.length > 0">
       <ul class="list-group bg-transparent">
-        <li class="list-group-item d-flex align-items-center" v-for="todo in sortedTodo()" :key="todo.id">
+        <li class="list-group-item d-flex align-items-center text-white" v-for="todo in sortedTodo" :key="todo.id" style="background: transparent !important;">
           <div class="form-check">
             <label :class="{ terminer: todo.completed }">
               <input class="form-check-input" type="checkbox" v-model="todo.completed" @click="replaceTodo">
@@ -51,7 +47,7 @@ ul.list-group.bg-transparent {
 
 <script setup>
 
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 // tableau des tache a faire
 const todos = ref([]);
@@ -73,7 +69,7 @@ const addTask = () => {
   task.value = '';
 }
 
-const sortedTodo = () => {
+const sortedTodo = computed(() => {
   const sortedTodo = todos.value.toSorted((a, b) => a.completed > b.completed ? 1 : -1)
 
   if (hideCompleted.value === true) {
@@ -82,7 +78,7 @@ const sortedTodo = () => {
   console.log(hideCompleted);
   
   return sortedTodo
-}
+})
 
 // supprime un tache
 const deleteTask = (e) => {
