@@ -54,33 +54,7 @@ ul.list-group.bg-transparent {
 import { ref } from 'vue'
 
 // tableau des tache a faire
-const todos = ref([
-  {
-    name: "une tache",
-    completed: true,
-    id: 1
-  },
-  {
-    name: "une 2e tache",
-    completed: true,
-    id: 2
-  },
-  {
-    name: "une 3e tache",
-    completed: false,
-    id: 3
-  },
-  {
-    name: "une 4e tache",
-    completed: false,
-    id: 4
-  },
-  {
-    name: "une 5e tache",
-    completed: false,
-    id: 5
-  }
-]);
+const todos = ref([]);
 
 // la nouvelle tache
 const task = ref('');
